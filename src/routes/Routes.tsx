@@ -6,6 +6,11 @@ import MainLayout from "@/layouts/MainLayout";
 import AuthLayout from "@/layouts/AuthLayout";
 import { UnProtectedRoute } from "./UnprotectedRoute";
 import SignIn from "@/pages/auth/SignIn";
+import EntryPoint from "@/pages/entryPoint";
+import Register from "@/pages/auth/Register";
+import OtpPage from "@/pages/auth/OtpPage";
+import ChangePassword from "@/pages/auth/ChangePassword";
+import ForgotPassword from "@/pages/auth/ForgotPassword";
 
 const routes: RouteObject[] = [
     {
@@ -23,7 +28,7 @@ const routes: RouteObject[] = [
                 children:[
                     {
                         index: true,
-                        // element:
+                        element: <EntryPoint/>
                     }
                 ]
             },
@@ -38,6 +43,22 @@ const routes: RouteObject[] = [
                     {
                         path: "sign-in",
                         element: <SignIn/>
+                    },
+                    {
+                        path: "register",
+                        element: <Register/>
+                    },
+                    {
+                        path: "confirmation",
+                        element: <OtpPage/>
+                    },
+                    {
+                        path: "change-password",
+                        element: <ChangePassword/>
+                    },
+                    {
+                        path: "forget-password",
+                        element: <ForgotPassword/>
                     }
                 ]
             }

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 export const ProtectedRoute = ({ children }: PropsWithChildren) =>{
     // const { authUser } = useAuth();
-    const authUser = false
+    const authUser = true
     if (!authUser) {
         return <Navigate to={"/auth/sign-in"} />
     }

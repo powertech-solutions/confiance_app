@@ -1,9 +1,9 @@
 import Cookies from "js-cookie";
-// import Cookies
 import { PropsWithChildren, createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { postRequest, putRequest } from "@/helpers/api/verbes";
 import { removeItemFromStore, setItemToStore } from "@/helpers/utils";
+import { OtpType } from "@/pages/auth/OtpPage";
 
 interface AuthInfo {
   username: string;
@@ -15,38 +15,44 @@ interface PasswordInfo {
   newPassword: string;
 }
 
+export interface ForgotType{
+  email: string;
+}
+
 export interface UserDataType {
   id: string,
   isLoggedIn: boolean;
   account: {
-    id: string,
-    active: boolean,
-    imageProfile: string,
-    email: string,
-    username: string,
+    id: string;
+    active: boolean;
+    imageProfile: string;
+    email: string;
+    username: string;
     role: {
-      id: string,
-      name: string
+      id: string;
+      name: string;
     },
-    token: string
+    token: string;
   },
   details: {
-    id: string,
-    registrationNumber: string,
-    dateOfBirth: string,
-    firstName: string,
-    lastName: string,
-    middleName: string,
-    gender: string
+    id: string;
+    registrationNumber: string;
+    dateOfBirth: string;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    gender: string;
   }
 }
 
 interface AuthContextType {
-  authUser: UserDataType | null,
-  loginAction: any,
-  logoutAction: any,
-  removeUserCookies: () => void,
-  logoutUser: any,
+  authUser: UserDataType | null;
+  loginAction: any;
+  logoutAction: any;
+  removeUserCookies: () => void;
+  forgotPassword: any;
+  logoutUser: any;
+  OtpValidation: any;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -55,18 +61,21 @@ const AuthContext = createContext<AuthContextType>({
   logoutAction: () => Promise<void>,
   removeUserCookies: () => {},
   logoutUser: (userId: any) =>  Promise<void>,
+  OtpValidation: (code: OtpType) =>  Promise<void>,
+  forgotPassword: (forgot: ForgotType) => Promise<void>,
+
 });
 
 export const AuthProvider = ({ children } : PropsWithChildren) => {
 
-  const authUser = Cookies.get('authUser') ? JSON.parse(Cookies.get('authUser')!) : null  
+  const authUser = Cookies.get('authUser') ? JSON.parse(Cookies.get('authUser')!) : null;
 
   const navigate = useNavigate();
 
   const loginAction = async (authData: AuthInfo) => {
 
     try{
-      const response = await postRequest<UserDataType>('/accounts/login', authData)
+      const response = await postRequest<UserDataType>('/accounts/login', authData);
       if(response.error) {
         return response.error;
       } else {
@@ -77,6 +86,23 @@ export const AuthProvider = ({ children } : PropsWithChildren) => {
     } catch(error:any) {
       throw error
     } 
+    
+  };
+
+  const OtpValidation = async (code: OtpType) => {
+    const response = code;
+    // try{
+    //   const response = await postRequest<UserDataType>('/accounts/otp', code)
+    //   if(response.error) {
+    //     return response.error;
+    //   } else {
+    //     Cookies.set("authUser", JSON.stringify(response.data!))
+    //     setItemToStore("token", response.data!.account.token)
+    //     return response.data
+    //   }
+    // } catch(error:any) {
+    //   throw error
+    // } 
     
   };
 
@@ -121,6 +147,20 @@ export const AuthProvider = ({ children } : PropsWithChildren) => {
     } 
   }
 
+  const forgotPassword = async (forgot: ForgotType) => {
+    try{
+      const response = await postRequest<ForgotType>('/accounts/forgotPassword', forgot)
+      if (response.error) {
+        return response.error  
+      }else{
+        response.data
+      }
+
+    }catch(error: any){
+      throw error
+    }
+  }
+
   const logoutUser = async (userAccountId:any) => {
     // unset user
 
@@ -148,7 +188,9 @@ export const AuthProvider = ({ children } : PropsWithChildren) => {
       loginAction,
       logoutAction,
       removeUserCookies,
-      logoutUser
+      logoutUser,
+      OtpValidation,
+      forgotPassword
     }),
     [authUser]
   );
