@@ -11,6 +11,7 @@ import Register from "@/pages/auth/Register";
 import OtpPage from "@/pages/auth/OtpPage";
 import ChangePassword from "@/pages/auth/ChangePassword";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
+import ContainerLayout from "@/layouts/containerLayout";
 
 const routes: RouteObject[] = [
     {
@@ -29,6 +30,15 @@ const routes: RouteObject[] = [
                     {
                         index: true,
                         element: <EntryPoint/>
+                    },
+                    {
+                        path: "admin",
+                        element: (
+                            <ContainerLayout/>
+                        ),
+                        children:[
+
+                        ]
                     }
                 ]
             },
