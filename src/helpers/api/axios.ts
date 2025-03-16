@@ -2,6 +2,7 @@ import Axios from "axios";
 import { initialConfig } from "@/config";
 import { getItemFromStore, removeItemFromStore  } from "../utils";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const axios = Axios.create({});
 
@@ -35,6 +36,7 @@ axios.interceptors.response.use(
     return res;
   },
   (error) => {
+    const navigate = useNavigate()
     if (error?.response?.status === 403) {
     }
     if (error?.response?.status === 401) {
@@ -43,6 +45,10 @@ axios.interceptors.response.use(
       Cookies.remove('parentId')
       removeItemFromStore('token')
       removeItemFromStore('account')
+      navigate("/error/unauthorized")
+    }
+    if (error?.response?.status === 500) {
+      navigate("/error/server-error")
     }
     throw error;
   }
