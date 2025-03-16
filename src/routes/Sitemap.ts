@@ -14,6 +14,7 @@ export interface RouteItems {
     active?: boolean;
     iconName: string;
     allowedRoles?: string[];
+    subRoutes?: RouteItems[];
     onClick?: () => void; 
 }
 

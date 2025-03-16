@@ -34,7 +34,7 @@ export function AppSidebar() {
     const navigate = useNavigate()
     
     return (
-        <Sidebar>
+        <Sidebar variant="inset" className="px-0">
             <SidebarHeader>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild className="outline-none">
