@@ -1,35 +1,32 @@
 import {
-    Dispatch,
-    PropsWithChildren,
-    SetStateAction,
-    createContext,
-    useContext,
-    useState
-  } from 'react';
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState
+} from 'react';
   
-  interface MainLayoutContextInterface {
-    contentClass: string;
-    setContentClass: Dispatch<SetStateAction<string>>;
-    footerClass: string;
-    setFooterClass: Dispatch<SetStateAction<string>>;
-  }
+interface MainLayoutContextInterface {
+  module: string;
+  setModule: Dispatch<SetStateAction<string>>;
+}
   
-  export const MainLayoutContext = createContext(
-    {} as MainLayoutContextInterface
+export const MainLayoutContext = createContext(
+  {} as MainLayoutContextInterface
+);
+  
+const MainLayoutProvider = ({ children }: PropsWithChildren) => {
+  const [module, setModule] = useState("")
+  return (
+    <MainLayoutContext.Provider
+      value={{ module, setModule }}
+    >
+      {children}
+    </MainLayoutContext.Provider>
   );
+};
   
-  const MainLayoutProvider = ({ children }: PropsWithChildren) => {
-    const [contentClass, setContentClass] = useState('');
-    const [footerClass, setFooterClass] = useState('');
-    return (
-      <MainLayoutContext.Provider
-        value={{ contentClass, setContentClass, footerClass, setFooterClass }}
-      >
-        {children}
-      </MainLayoutContext.Provider>
-    );
-  };
-  
-  export const useMainLayoutContext = () => useContext(MainLayoutContext);
-  
-  export default MainLayoutProvider;
+export const useMainLayoutContext = () => useContext(MainLayoutContext);
+
+export default MainLayoutProvider;

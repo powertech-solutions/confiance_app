@@ -21,9 +21,17 @@ import {
 } from "@/components/ui/dropdown-menu"
 import confiance from "../../assets/images/confiance/icon-confiance-blue-gradient.png"
 import { Icon } from "@iconify/react/dist/iconify.js"
-import { routes } from "@/routes/Sitemap"
+import { sidebarRoutes } from "@/routes/Sitemap"
+import { useMainLayoutContext } from "@/providers/MainLayoutProviders"
+import { useNavigate } from "react-router-dom"
    
 export function AppSidebar() {
+
+    const {module} = useMainLayoutContext()
+
+    const routes = sidebarRoutes.find((item) => item.moduleName === module)?.routes
+
+    const navigate = useNavigate()
     
     return (
         <Sidebar>
@@ -46,31 +54,31 @@ export function AppSidebar() {
                             <h4 className="font-semibold text-[0.8em] text-gray-600">Modules</h4>
                         </DropdownMenuLabel>
                         <DropdownMenuGroup>
-                            <DropdownMenuItem className="text-[0.85em]">
+                            <DropdownMenuItem className="text-[0.85em]" onClick={()=>navigate("/modules/client")}>
                                 <div className="w-[1.9em] h-[1.9em] border rounded-[3px] flex items-center justify-center">
                                     <Icon icon="tabler:receipt-dollar" className=" text-[0.7em]" />
                                 </div>
                                 Clients et Ventes
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="text-[0.85em]">
+                            <DropdownMenuItem className="text-[0.85em]" onClick={()=>navigate("/modules/supply")}>
                                 <div className="w-[1.9em] h-[1.9em] border rounded-[3px] flex items-center justify-center">
                                     <Icon icon="tabler:basket-plus" className=" text-[0.7em]" />
                                 </div>
                                 Approvisionnements
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="text-[0.85em]">
+                            <DropdownMenuItem className="text-[0.85em]" onClick={()=>navigate("/modules/planning")}>
                                 <div className="w-[1.9em] h-[1.9em] border rounded-[3px] flex items-center justify-center">
                                     <Icon icon="icon-park-outline:plan" className=" text-[0.7em]" />
                                 </div>
                                 Planification
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="text-[0.85em]">
+                            <DropdownMenuItem className="text-[0.85em]" onClick={()=>navigate("/modules/finance")}>
                         <       div className="w-[1.9em] h-[1.9em] border rounded-[3px] flex items-center justify-center">
                                     <Icon icon="famicons:calculator-outline" className=" text-[0.7em]" />
                                 </div>
                                 Finance et comptabilité
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="text-[0.85em]">
+                            <DropdownMenuItem className="text-[0.85em]" onClick={()=>navigate("/modules/documents")}>
                                 <div className="w-[1.9em] h-[1.9em] border rounded-[3px] flex items-center justify-center">
                                     <Icon icon="hugeicons:legal-document-02" className=" text-[0.7em]" />
                                 </div>
@@ -86,7 +94,7 @@ export function AppSidebar() {
                     {/* <SidebarGroupLabel>Application</SidebarGroupLabel> */}
                     <SidebarGroupContent>
                         <SidebarMenu>
-                        {routes.map((item) => (
+                        {routes?.map((item) => (
                             <SidebarMenuItem key={item.label}>
                             <SidebarMenuButton asChild>
                                 <a href={item.pathName}>

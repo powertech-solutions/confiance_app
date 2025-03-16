@@ -1,5 +1,5 @@
 import App from "@/App";
-import { RouteObject, createBrowserRouter } from "react-router-dom";
+import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import MainLayoutProvider from "@/providers/MainLayoutProviders";
 import MainLayout from "@/layouts/MainLayout";
@@ -12,6 +12,11 @@ import OtpPage from "@/pages/auth/OtpPage";
 import ChangePassword from "@/pages/auth/ChangePassword";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
 import ContainerLayout from "@/layouts/containerLayout";
+import ClientModule from "@/pages/modules/ClientsModule";
+import SupplyModule from "@/pages/modules/SupplyModule";
+import PlanningModule from "@/pages/modules/PlanningModule";
+import FinanceModule from "@/pages/modules/FinanceModule";
+import DocuementsModule from "@/pages/modules/DocumentsModule";
 
 const routes: RouteObject[] = [
     {
@@ -28,7 +33,7 @@ const routes: RouteObject[] = [
                 ),
                 children:[
                     {
-                        index: true,
+                        path: "entry-point",
                         element: <EntryPoint/>
                     },
                     {
@@ -37,7 +42,55 @@ const routes: RouteObject[] = [
                             <ContainerLayout/>
                         ),
                         children:[
-
+                            {
+                                index: true,
+                                element: <Navigate to="client" replace />
+                            },
+                            {
+                                path: "client",
+                                element: (
+                                    <ClientModule/>
+                                ),
+                                children:[
+        
+                                ]
+                            },
+                            {
+                                path: "supply",
+                                element: (
+                                    <SupplyModule/>
+                                ),
+                                children:[
+        
+                                ]
+                            },
+                            {
+                                path: "planning",
+                                element: (
+                                    <PlanningModule/>
+                                ),
+                                children:[
+        
+                                ]
+                            },
+                            {
+                                path: "finance",
+                                element: (
+                                    <FinanceModule/>
+                                ),
+                                children:[
+        
+                                ]
+                            },
+                            {
+                                path: "documents",
+                                element: (
+                                    <DocuementsModule/>
+                                ),
+                                children:[
+        
+                                ]
+                            }
                         ]
                     }
                 ]
