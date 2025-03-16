@@ -32,7 +32,7 @@ const routes: RouteObject[] = [
                         element: <EntryPoint/>
                     },
                     {
-                        path: "admin",
+                        path: "modules",
                         element: (
                             <ContainerLayout/>
                         ),
