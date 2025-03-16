@@ -5,16 +5,9 @@ import { Outlet } from "react-router-dom";
 
 export default function ClientModule() {
     const {setModule} = useMainLayoutContext()
-
-    const authorized = true
-
     useEffect(() => {
         setModule("Client");
     }, []);
-
-    if (!authorized) {
-        return <UnauthorizedComponent/>
-    }
     return (
         <main>
             <Outlet/>

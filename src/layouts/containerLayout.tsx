@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/core/AppSidebar";
-import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
 
 export default function ContainerLayout() {
@@ -8,7 +8,6 @@ export default function ContainerLayout() {
             <AppSidebar />
             <SidebarInset>
                 <main>
-                    
                     <Outlet/>
                 </main>
             </SidebarInset>

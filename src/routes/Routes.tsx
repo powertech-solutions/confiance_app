@@ -12,11 +12,11 @@ import OtpPage from "@/pages/auth/OtpPage";
 import ChangePassword from "@/pages/auth/ChangePassword";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
 import ContainerLayout from "@/layouts/containerLayout";
-import ClientModule from "@/pages/modules/ClientsModule";
-import SupplyModule from "@/pages/modules/SupplyModule";
-import PlanningModule from "@/pages/modules/PlanningModule";
-import FinanceModule from "@/pages/modules/FinanceModule";
-import DocuementsModule from "@/pages/modules/DocumentsModule";
+import ClientModule from "@/pages/modules/client/ClientsModule";
+import SupplyModule from "@/pages/modules/supply/SupplyModule";
+import PlanningModule from "@/pages/modules/planning/PlanningModule";
+import FinanceModule from "@/pages/modules/finance/FinanceModule";
+import DocuementsModule from "@/pages/modules/document/DocumentsModule";
 
 const routes: RouteObject[] = [
     {
@@ -44,7 +44,7 @@ const routes: RouteObject[] = [
                         children:[
                             {
                                 index: true,
-                                element: <Navigate to="client" replace />
+                                element: <Navigate to="/lost-page" replace />
                             },
                             {
                                 path: "client",
@@ -122,6 +122,27 @@ const routes: RouteObject[] = [
                     {
                         path: "forget-password",
                         element: <ForgotPassword/>
+                    }
+                ]
+            },
+            {
+                path: "/lost-page",
+                element: "I'm lost"
+            },
+            {
+                path: "/error/",
+                children:[
+                    {
+                        index: true,
+                        element: <Navigate to="/lost-page" replace />
+                    },
+                    {
+                        path: "unauthorized",
+                        element: "unauthorized"
+                    },
+                    {
+                        path: "server-error",
+                        element: "unauthorized"
                     }
                 ]
             }
