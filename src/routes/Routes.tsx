@@ -17,6 +17,7 @@ import SupplyModule from "@/pages/modules/supply/SupplyModule";
 import PlanningModule from "@/pages/modules/planning/PlanningModule";
 import FinanceModule from "@/pages/modules/finance/FinanceModule";
 import DocuementsModule from "@/pages/modules/document/DocumentsModule";
+import ClientManagement from "@/pages/modules/client/ClientManagement";
 
 const routes: RouteObject[] = [
     {
@@ -47,12 +48,23 @@ const routes: RouteObject[] = [
                                 element: <Navigate to="/lost-page" replace />
                             },
                             {
-                                path: "client",
+                                path: "clients",
                                 element: (
                                     <ClientModule/>
                                 ),
                                 children:[
-        
+                                    {
+                                        index: true,
+                                        element: <Navigate to="dashboard" replace />
+                                    },
+                                    {
+                                        path: "dashboard",
+                                        element: "Dashboard"
+                                    },
+                                    {
+                                        path: "client-management",
+                                        element: <ClientManagement/>
+                                    }
                                 ]
                             },
                             {

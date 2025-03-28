@@ -30,7 +30,7 @@ export default function PageHeader({breadcrumList}:BreadcrumbProps) {
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator className="hidden md:block" />
                             </>:
-                            <BreadcrumbItem>
+                            <BreadcrumbItem key={item.label}>
                                 <BreadcrumbPage>{item.label}</BreadcrumbPage>
                             </BreadcrumbItem>
                         ))}

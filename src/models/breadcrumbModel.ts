@@ -1,5 +1,5 @@
 export interface BreadcrumbModel{
     label: string;
-    link: string;
+    link?: string;
     isPage?: boolean;
 }

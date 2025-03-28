@@ -1,4 +1,3 @@
-
 export const ROLES = {
     ADMIN: "ADMIN",
     SELLER: "SELLER",
@@ -31,16 +30,37 @@ export const sidebarRoutes: ModuleItems[] = [
         routes:[
             {
                 label: 'Tableau de Bord',
-                pathName: '/dashboard',
+                pathName: '/modules/clients/dashboard',
                 active: true,
                 iconName: "material-symbols:dashboard-outline-rounded",
                 allowedRoles: [ROLES.ADMIN],
             },
             {
-                label: 'Gestion des clients',
-                pathName: '/general-secretariat',
+                label: 'Gestion des Clients',
+                pathName: '/modules/clients/client-management',
                 active: true,
                 iconName: "flowbite:users-outline",
+                allowedRoles: [ROLES.ADMIN],
+            },
+            {
+                label: 'Gestion des Factures',
+                pathName: '/modules/clients/invoice-management',
+                active: true,
+                iconName: "flowbite:users-outline",
+                allowedRoles: [ROLES.ADMIN],
+            },
+            {
+                label: 'Produits et Services',
+                pathName: '/modules/clients/product-services',
+                active: true,
+                iconName: "mdi:marketplace-outline",
+                allowedRoles: [ROLES.ADMIN],
+            },
+            {
+                label: 'Assurance qualité',
+                pathName: '/modules/clients/quality-insurance',
+                active: true,
+                iconName: "lucide:shield-check",
                 allowedRoles: [ROLES.ADMIN],
             },
         ]

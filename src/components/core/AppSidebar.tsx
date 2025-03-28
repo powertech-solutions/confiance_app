@@ -9,6 +9,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    useSidebar,
 } from "@/components/ui/sidebar"
 import {
     DropdownMenu,
@@ -23,7 +24,7 @@ import confiance from "../../assets/images/confiance/icon-confiance-blue-gradien
 import { Icon } from "@iconify/react/dist/iconify.js"
 import { sidebarRoutes } from "@/routes/Sitemap"
 import { useMainLayoutContext } from "@/providers/MainLayoutProviders"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
    
 export function AppSidebar() {
 
@@ -32,6 +33,8 @@ export function AppSidebar() {
     const routes = sidebarRoutes.find((item) => item.moduleName === module)?.routes
 
     const navigate = useNavigate()
+
+    const {} = useSidebar()
     
     return (
         <Sidebar variant="inset" className="px-0">
@@ -96,11 +99,11 @@ export function AppSidebar() {
                         <SidebarMenu>
                         {routes?.map((item) => (
                             <SidebarMenuItem key={item.label}>
-                            <SidebarMenuButton asChild>
-                                <a href={item.pathName}>
+                            <SidebarMenuButton asChild className="text-[0.97em]">
+                                <Link to={item.pathName!}>
                                 <Icon icon={item.iconName} />
                                 <span>{item.label}</span>
-                                </a>
+                                </Link>
                             </SidebarMenuButton>
                             </SidebarMenuItem>
                         ))}
